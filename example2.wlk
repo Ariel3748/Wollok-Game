@@ -11,20 +11,26 @@ object juego{
         game.schedule(1500,{i.estaColisionando(false)})                     //Aca lo hice medio "Con alambre" porque no hay una forma de cambiar el estado interno de estaColisionando a false cuanso se separa, asi que despues de 1.5s lo cambio automaticamente
         })
     keyboard.k().onPressDo({pedidoArmado.eliminarUltimoIngrediente()})
-    keyboard.t().onPressDo({self.metodo()})                                 //Llama al metodo metodo (me cago en la creatividad) para que cuando toco la T verifique que esta colisionanso con eso mismo y lo clona
+    keyboard.t().onPressDo({self.hacerClon()})                                 //Llama al metodo hacerClon para que cuando toco la T verifique que esta colisionanso con eso mismo y lo clona
     keyboard.x().onPressDo({console.println(pedidoArmado.ingredientes())})  //Verificaicon por consola de la lista de productos que se va armando
     keyboard.enter().onPressDo({puntero.ganar()})                           //Llama a verificar si esta bien loq ue armamos
+    keyboard.c().onPressDo({self.cocinar()})
   }
     
 
-    method metodo(){
+    method hacerClon(){
          var objetivo = puntero.ultimoColisionado()
          if (objetivo !== null && objetivo.estaColisionando()) {
-        objetivo.crearClon()
+            objetivo.crearClon()
         }
     }
 
-
+    method cocinar() {
+       var objetivo = puntero.ultimoColisionado()
+         if (objetivo !== null && objetivo.estaColisionando()) {
+            objetivo.cocinar()
+        }
+    }
 }
 
 
@@ -51,8 +57,14 @@ object pedidoArmado{
     self.agregarUltimoElemento()
     }
 
+  method llevarALaParrillaUltimoElemento(){
+    
+    ingredientes.last().cocinar()
+
+  }
+
   method compararPedido(){
-    var x = ingredientes.map({e=>e.ingrediente()})
+    var x = ingredientes.map({e=>e.ingrediente()})          //Comparo los strings de los pedidos POrque si comparo el elemento en si las instancias se llaman a Pan o a Carne y no me sirve
     return x == orden.orden()
   }
 }
@@ -67,6 +79,7 @@ object puntero{
   var property position = game.center()
 
   method ganar() = if(pedidoArmado.compararPedido()){game.say(self,"Ganaste")} else{game.say(self,"Perdiste")}
+
 
 }
 
@@ -134,7 +147,15 @@ class Carne inherits Alimento{
 
   override method cocinar(){
     super()
+    const posActual = puntero.position()
     calorias += 100
+    position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
+    posicion.usarParrilla()
+    game.schedule(5000, {
+        image = "carne-cocida.png"
+        position = posActual
+        posicion.dejarDeUsarParrilla()
+    })
   }
 
   method ingrediente() = "Carne"
@@ -151,6 +172,15 @@ object posicion{
   var property posicionY = 5
   method usar(){
     posicionY = posicionY + 1
+  }
+
+  var property posicionParrillaX = 6
+  var property posicionParrillaY = 0   
+  method usarParrilla(){
+    posicionParrillaX = posicionParrillaX + 1
+  }
+  method dejarDeUsarParrilla(){
+    posicionParrillaX = posicionParrillaX - 1
   }
 }
 
