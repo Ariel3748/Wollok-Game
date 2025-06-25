@@ -1,0 +1,8 @@
+{
+  "name": "WollokGame",
+  "version": "1.0.0",
+  "resourceFolder": "assets",
+  "wollokVersion": "4.0.0",
+  "author": "ariel",
+  "license": "ISC"
+}

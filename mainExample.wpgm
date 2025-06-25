@@ -1,0 +1,17 @@
+import wollok.game.*
+
+import example2.*
+
+
+program PepitaGame {
+	game.title("Pepita")
+	game.height(10)
+	game.width(10)
+
+	// add assets in asset folder, for example, for the background
+  // game.boardGround("fondo2.jpg")
+
+	//
+	juego.iniciar()
+	game.start()
+}
