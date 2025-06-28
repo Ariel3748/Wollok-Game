@@ -1,6 +1,7 @@
 import wollok.game.*
 
 import MainGame.*
+import PantallaCarga.*
 
 
 program PepitaGame {
@@ -12,6 +13,7 @@ program PepitaGame {
   // game.boardGround("fondo2.jpg")
 
 	//
-	juego.iniciar()
+	//juego.iniciar()
+	pantallaCarga.iniciarPantallaCarga()
 	game.start()
 }
