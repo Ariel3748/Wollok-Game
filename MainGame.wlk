@@ -7,6 +7,7 @@ object juego{
     game.addVisual(unPan) 
     game.addVisual(unaCarne)
     game.addVisualCharacter(puntero)
+    game.addVisual(ordenAmostrar)
     game.onCollideDo(puntero, {                                             //cada vez que colisiona con algo, le cambia el estado interno a algo a true y al puntero le digo quien es algo para que luego verifique que sea != de null
         i=>i.estaColisionando(true)
         puntero.ultimoColisionado(i)
@@ -46,7 +47,19 @@ object puntero{
   method image() = imagen
   var property position = game.center()
 
-  method ganar() = if(pedidoArmado.compararPedido()){game.say(self,"Ganaste")} else{game.say(self,"Perdiste")}
+  method ganar() = 
+    if(pedidoArmado.compararPedido())
+    {
+      game.say(self,"Ganaste")
+      pedidoArmado.clean()
+      orden.newOrden()
+      console.println(orden.orden())
+
+    } 
+    else
+    {
+      game.say(self,"Perdiste")
+    }
 
 
 }

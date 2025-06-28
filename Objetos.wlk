@@ -14,6 +14,10 @@ object pedidoArmado{
   }
 
 
+  method clean(){
+    ingredientes.forEach({e=>self.eliminarUltimoIngrediente()})
+  }
+
   method eliminarUltimoIngrediente(){
     game.removeVisual(ingredientes.last())
     ingredientes.remove(ingredientes.last())
@@ -99,8 +103,13 @@ object orden{
       orden.clear()
       armador.forEach({e=>orden.add(ingredientes.get(self.numeroRandom()))})
     }
-    
+
 
 }
 
 
+object ordenAmostrar{
+
+  var property position = game.at(6,8)
+  method text() = orden.orden().toString()
+}
