@@ -8,7 +8,7 @@ object juego{
     game.onCollideDo(puntero, {                                             //cada vez que colisiona con algo, le cambia el estado interno a algo a true y al puntero le digo quien es algo para que luego verifique que sea != de null
         i=>i.estaColisionando(true)
         puntero.ultimoColisionado(i)
-        game.schedule(1500,{i.estaColisionando(false)})                     //Aca lo hice medio "Con alambre" porque no hay una forma de cambiar el estado interno de estaColisionando a false cuanso se separa, asi que despues de 1.5s lo cambio automaticamente
+        game.schedule(750,{i.estaColisionando(false)})                     //Aca lo hice medio "Con alambre" porque no hay una forma de cambiar el estado interno de estaColisionando a false cuanso se separa, asi que despues de 1.5s lo cambio automaticamente
         })
     keyboard.k().onPressDo({pedidoArmado.eliminarUltimoIngrediente()})
     keyboard.t().onPressDo({self.hacerClon()})                                 //Llama al metodo hacerClon para que cuando toco la T verifique que esta colisionanso con eso mismo y lo clona
@@ -130,7 +130,6 @@ class Pan inherits Alimento{
     image = "pan.png"
     position = game.at(posicion.posicionX(),posicion.posicionY())   //Cuando se instancia un nuevo objeto se acomda encima de la ultima cosa agregada"
   }
-
 
   method ingrediente() = "Pan"
 
