@@ -7,6 +7,7 @@ object juego{
     game.addVisual(unPan) 
     game.addVisual(unaCarne)
     game.addVisualCharacter(puntero)
+    orden.newOrden()
     game.addVisual(ordenAmostrar)
     game.onCollideDo(puntero, {                                             //cada vez que colisiona con algo, le cambia el estado interno a algo a true y al puntero le digo quien es algo para que luego verifique que sea != de null
         i=>i.estaColisionando(true)

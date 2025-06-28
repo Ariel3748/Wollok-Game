@@ -101,7 +101,9 @@ object orden{
     method numeroRandom() = 0.randomUpTo(ingredientes.size()).truncate(0)
     method newOrden(){
       orden.clear()
+      orden.add("Pan")
       armador.forEach({e=>orden.add(ingredientes.get(self.numeroRandom()))})
+      orden.add("Pan")
     }
 
 
@@ -110,6 +112,6 @@ object orden{
 
 object ordenAmostrar{
 
-  var property position = game.at(6,8)
+  var property position = game.at(4,9)
   method text() = orden.orden().toString()
 }

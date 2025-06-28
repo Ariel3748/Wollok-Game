@@ -18,7 +18,7 @@ class Pan inherits Alimento{
 
   method initialize(){
     calorias = 100
-    image = "pan.png"
+    image = "Botella_de_ketchup.png"
     position = game.at(posicion.posicionX(),posicion.posicionY())   //Cuando se instancia un nuevo objeto se acomda encima de la ultima cosa agregada"
   }
 
@@ -42,7 +42,7 @@ class Carne inherits Alimento{
     position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
     posicion.usarParrilla()
     game.schedule(5000, {
-        image = "carne-cocida.png"
+        image = "Carne50.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
     })
