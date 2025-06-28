@@ -90,5 +90,17 @@ object posicion{
 
 
 object orden{
-    var property orden = ["Pan","Carne","Carne","Pan"]
+    const property ingredientes = ["Tomate", "Lechuga", "Cebolla", "Mayonesa", "Ketchup", "Cheddar", "Bacon", "Paty de Lenteja", "Carne"]
+
+    var property orden = []
+    const armador = [1,2,3,4]
+    method numeroRandom() = 0.randomUpTo(ingredientes.size()).truncate(0)
+    method newOrden(){
+      orden.clear()
+      armador.forEach({e=>orden.add(ingredientes.get(self.numeroRandom()))})
+    }
+    
+
 }
+
+

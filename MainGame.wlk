@@ -3,6 +3,7 @@ import Objetos.*
 
 object juego{
   method iniciar(){
+
     game.addVisual(unPan) 
     game.addVisual(unaCarne)
     game.addVisualCharacter(puntero)
