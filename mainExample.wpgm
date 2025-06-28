@@ -1,6 +1,6 @@
 import wollok.game.*
 
-import example2.*
+import MainGame.*
 
 
 program PepitaGame {

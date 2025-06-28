@@ -4,3 +4,7 @@
 
 # Wollok Log
 *.log
+
+
+#Primer boceto
+*.example.wlk
