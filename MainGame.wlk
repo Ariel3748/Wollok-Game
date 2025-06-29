@@ -9,6 +9,7 @@ object juego{
     game.addVisualCharacter(puntero)
     orden.newOrden()
     game.addVisual(ordenAmostrar)
+    game.addVisual(puntaje)
     game.onCollideDo(puntero, {                                             //cada vez que colisiona con algo, le cambia el estado interno a algo a true y al puntero le digo quien es algo para que luego verifique que sea != de null
         i=>i.estaColisionando(true)
         puntero.ultimoColisionado(i)
@@ -51,15 +52,18 @@ object puntero{
   method ganar() = 
     if(pedidoArmado.compararPedido())
     {
+      puntaje.puntos(puntaje.puntos() + 15)
       game.say(self,"Ganaste")
       pedidoArmado.clean()
       orden.newOrden()
-      console.println(orden.orden())
+      console.println(puntaje.puntos())
 
     } 
     else
     {
+      puntaje.puntos((puntaje.puntos() - 15))
       game.say(self,"Perdiste")
+      console.println(puntaje.puntos())
     }
 
 

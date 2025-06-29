@@ -69,7 +69,8 @@ object about inherits Button{
     position = game.at(4,5)
    }
    override method accion(){
-    game.boardGround("nosotros")
+    game.clear()
+    game.addVisual("")
     keyboard.m().onPressDo({pantallaCarga.iniciarPantallaCarga()})
    }
     }

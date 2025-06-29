@@ -6,13 +6,9 @@ object pedidoArmado{
   var property ingredientes = []
   var property ultimoElemento =  null
 
-
-  
-
   method agregarUltimoElemento(){
     game.addVisual(ingredientes.last())
   }
-
 
   method clean(){
     ingredientes.forEach({e=>self.eliminarUltimoIngrediente()})
@@ -30,18 +26,21 @@ object pedidoArmado{
     }
 
   method llevarALaParrillaUltimoElemento(){
-    
     ingredientes.last().cocinar()
-
   }
 
   method compararPedido(){
     var x = ingredientes.map({e=>e.ingrediente()})          //Comparo los strings de los pedidos POrque si comparo el elemento en si las instancias se llaman a Pan o a Carne y no me sirve
-    return x == orden.orden()
+    return (x == orden.orden())
   }
 }
 
 
+
+
+
+
+//---------------------------------------------------Objetos de Muestra---------------------------------------------------------------//
 
 object unPan inherits Pan {
   override method position() = game.at(1,2)
@@ -68,6 +67,26 @@ object unaCarne inherits Carne{
   pedidoArmado.agregarIngrediente(nuevaCarne)
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //
@@ -109,9 +128,17 @@ object orden{
 
 }
 
-
 object ordenAmostrar{
 
   var property position = game.at(4,9)
   method text() = orden.orden().toString()
+}
+
+
+
+object puntaje {
+  var property position = game.at(0,8)
+  var property puntos = 0
+  method text() = "P:" + puntos
+
 }
