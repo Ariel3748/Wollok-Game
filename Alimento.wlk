@@ -63,6 +63,118 @@ class Tomate inherits Alimento{
     position = game.at(posicion.posicionX(),posicion.posicionY())
   }
 
-  
+  method ingrediente() = "Tomate"
+}
+
+
+class Lechuga inherits Alimento{
+method initialize(){
+  calorias = 100
+  image = "Lechuguita.png"
+  position = game.at(posicion.posicionX(),posicion.posicionY())
+}
+
+  method ingrediente() = "Lechuga"
+}
+
+
+class Cebolla inherits Alimento{
+  method initialize(){
+    calorias = 80
+    image = "Cebollita.png"
+    position = game.at(posicion.posicionX(),posicion.posicionY())
+  }
+
+  method ingrediente() = "Cebolla"
+}
+
+class Mayonesa inherits Alimento{
+  method initialize(){
+    calorias = 150
+    image = "Mayonesita.png"
+    position = game.at(posicion.posicionX(),posicion.posicionY())
+  }
+
+  method ingrediente() = "Mayonesa"
+}
+
+class Ketchup inherits Alimento(){
+  method initialize(){
+    calorias = 120
+    image = "ketchup.png"
+    position = game.at(posicion.posicionX(),posicion.posicionY())
+  }
+
+  method ingrediente()="Ketchup"
+}
+
+
+class Cheddar inherits Alimento(){
+  method initialize(){
+    calorias = 200
+    image = "CheddarCrudo.png"
+    position = game.at(posicion.posicionX(),posicion.posicionY())
+  }
+
+  override method cocinar(){
+    super()
+    const posActual = puntero.position()
+    calorias += 100
+    position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
+    posicion.usarParrilla()
+    game.schedule(5000, {
+        image = "Quesito.png"
+        position = posActual
+        posicion.dejarDeUsarParrilla()
+    })
+  }
+
+  method ingrediente() = "Cheddar"
+
+} 
+
+class Bacon inherits Alimento(){
+  method initialize(){
+    calorias = 250
+    image = "BaconCrudo.png"
+    position = game.at(posicion.posicionX(),posicion.posicionY())
+  }
+
+  override method cocinar(){
+    super()
+    const posActual = puntero.position()
+    calorias += 100
+    position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
+    posicion.usarParrilla()
+    game.schedule(5000, {
+        image = "Bacon.png"
+        position = posActual
+        posicion.dejarDeUsarParrilla()
+    })
+  }
+
+  method ingrediente() = "Bacon"
+}
+
+
+class Patylenteja inherits Alimento{
+  method initialize(){
+    calorias = 90
+    image = "Hamburguesa_LentejaCruda.png"
+    position = game.at(posicion.posicionX(),posicion.posicionY())
+  }
+
+    override method cocinar(){
+    super()
+    const posActual = puntero.position()
+    calorias += 100
+    position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
+    posicion.usarParrilla()
+    game.schedule(5000, {
+        image = "Hamburguesa_de_lentejas.png"
+        position = posActual
+        posicion.dejarDeUsarParrilla()
+    })
+  }
 
 }
