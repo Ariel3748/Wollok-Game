@@ -4,7 +4,7 @@ import PantallaCarga.*
 
 object juego{
   method iniciar(){
-
+    game.addVisual(unBacon)
     game.addVisual(unPan) 
     game.addVisual(unaCarne)
     game.addVisualCharacter(puntero)
@@ -36,9 +36,13 @@ object juego{
 
     method cocinar() {
        var objetivo = puntero.ultimoColisionado()
-         if (objetivo !== null && objetivo.estaColisionando()) {
-            objetivo.cocinar()
-        }
+         if (objetivo !== null && objetivo.estaColisionando() && objetivo.estaCrudo() && !objetivo.estaEnLaParrilla()) {
+            objetivo.cocinar()}
+
+         if((!objetivo.estaCrudo()) && objetivo !== null && objetivo.estaColisionando() && !objetivo.estaEnLaParrilla()){
+           objetivo.quemar()
+         }
+        
     }
 
 

@@ -6,8 +6,9 @@ class Alimento{
   var image
   var position
 
+  var property estaEnLaParrilla = false
   var property estaColisionando = false   
-  var estaCrudo = true
+  var property estaCrudo = true
   method cocinar(){estaCrudo = false}
   method image() = image
   method position() = position
@@ -39,6 +40,7 @@ class Carne inherits Alimento{
   }
 
   override method cocinar(){
+    self.estaEnLaParrilla(true)
     super()
     const posActual = puntero.position()
     calorias += 100
@@ -48,7 +50,22 @@ class Carne inherits Alimento{
         image = "Carne50.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
+        self.estaEnLaParrilla(false)
     })
+  }
+
+  method quemar(){
+    const posActual = puntero.position()
+    calorias += 500
+    position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
+    posicion.usarParrilla()
+    game.schedule(5000, {
+        image = "Carboncito.png"
+        position = posActual
+        posicion.dejarDeUsarParrilla()
+    puntaje.setPuntosLose()
+    })
+
   }
 
   method ingrediente() = "Carne"
@@ -117,6 +134,7 @@ class Cheddar inherits Alimento(){
   }
 
   override method cocinar(){
+    self.estaEnLaParrilla(true)
     super()
     const posActual = puntero.position()
     calorias += 100
@@ -126,7 +144,22 @@ class Cheddar inherits Alimento(){
         image = "Quesito.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
+        self.estaEnLaParrilla(false)
     })
+  }
+
+    method quemar(){
+      const posActual = puntero.position()
+      calorias += 500
+      position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
+      posicion.usarParrilla()
+      game.schedule(5000, {
+          image = "Carboncito.png"
+          position = posActual
+          posicion.dejarDeUsarParrilla()
+      puntaje.setPuntosLose()
+    })
+
   }
 
   method ingrediente() = "Cheddar"
@@ -141,6 +174,7 @@ class Bacon inherits Alimento(){
   }
 
   override method cocinar(){
+    self.estaEnLaParrilla(true)
     super()
     const posActual = puntero.position()
     calorias += 100
@@ -150,7 +184,22 @@ class Bacon inherits Alimento(){
         image = "Bacon.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
+        self.estaEnLaParrilla(false)
     })
+  }
+
+  method quemar(){
+    const posActual = puntero.position()
+    calorias += 500
+    position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
+    posicion.usarParrilla()
+    game.schedule(5000, {
+        image = "Carboncito.png"
+        position = posActual
+        posicion.dejarDeUsarParrilla()
+    puntaje.setPuntosLose()
+    })
+
   }
 
   method ingrediente() = "Bacon"
@@ -165,6 +214,7 @@ class Patylenteja inherits Alimento{
   }
 
     override method cocinar(){
+      self.estaEnLaParrilla(true)
     super()
     const posActual = puntero.position()
     calorias += 100
@@ -174,7 +224,23 @@ class Patylenteja inherits Alimento{
         image = "Hamburguesa_de_lentejas.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
+        self.estaEnLaParrilla(false)
     })
   }
 
+    method quemar(){
+    const posActual = puntero.position()
+    calorias += 500
+    position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
+    posicion.usarParrilla()
+    game.schedule(5000, {
+        image = "Carboncito.png"
+        position = posActual
+        posicion.dejarDeUsarParrilla()
+    puntaje.setPuntosLose()
+    })
+
+  }
+
+  method ingrediente() = "Paty de Lenteja"
 }

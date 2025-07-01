@@ -68,7 +68,22 @@ object unaCarne inherits Carne{
   }
 }
 
+object unBacon inherits Bacon{
 
+  
+  override method image() = "BaconCrudo.png"
+    
+
+  override method position() = game.at(1,0)
+  
+  method crearClon(){
+    var nuevoBacon
+    nuevoBacon = new Bacon()
+    nuevoBacon.initialize()
+    posicion.usar()
+  pedidoArmado.agregarIngrediente(nuevoBacon)
+  }
+}
 
 
 
