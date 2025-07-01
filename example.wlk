@@ -1,4 +1,4 @@
-object juego{
+/*object juego{
   method iniciar(){
     game.addVisual(unPan) 
     game.addVisual(unaCarne)
@@ -130,4 +130,4 @@ object posicion{
   method usar(){
     posicionX =+ 1
   }
-}
+}*/

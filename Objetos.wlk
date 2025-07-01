@@ -138,10 +138,16 @@ object ordenAmostrar{
 
 object puntaje {
   var property position = game.at(0,8)
-  var puntos = 0
+  var property puntos = 0
   method puntos() = puntos
-  method setPuntosWin(){puntos = (puntos + 15).min(60)}
+  method setPuntosWin(){puntos = (puntos + 15).min(61)}
   method setPuntosLose(){puntos = (puntos -15).max(0)}
   method text() = "P:" + puntos
 
+}
+
+
+object winMssg{
+  var property position = game.origin()
+  var property image = "WinMensaje.png"
 }

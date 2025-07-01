@@ -1,5 +1,6 @@
 import Alimento.*
 import Objetos.*
+import PantallaCarga.*
 
 object juego{
   method iniciar(){
@@ -20,6 +21,9 @@ object juego{
     keyboard.x().onPressDo({console.println(pedidoArmado.ingredientes())})  //Verificaicon por consola de la lista de productos que se va armando
     keyboard.enter().onPressDo({puntero.ganar()})                           //Llama a verificar si esta bien loq ue armamos
     keyboard.c().onPressDo({self.cocinar()})
+    keyboard.backspace().onPressDo({puntaje.setPuntosWin()})
+    game.onTick(1000, "VerificarWin", {self.ganar()})
+
   }
     
 
@@ -36,6 +40,20 @@ object juego{
             objetivo.cocinar()
         }
     }
+
+
+    method ganar(){
+      if(self.evaluarJuego()){
+        puntaje.puntos(0)
+        game.clear()
+        const sonidoWin = game.sound("VictoriaSound.mp3")
+        sonidoWin.play()
+        game.removeTickEvent("VerificarWin")
+        game.addVisual(winMssg)
+        keyboard.q().onPressDo({pantallaCarga.iniciarPantallaCarga()})
+      }}
+
+    method evaluarJuego()= (puntaje.puntos() > 60)
 }
 
 

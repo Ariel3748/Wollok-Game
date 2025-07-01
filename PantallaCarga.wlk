@@ -22,18 +22,9 @@ class Button{
     var texto
     var property position
     method accion(){}
-    const colorSelectionOn = 'B00000FF'
-    const colorSelectionOff = 'B00000FF'            //Aca me gustaria agregar que cuando alguien hace alguna accion de seleccion de menu. Tenga un retardo de 0.5s y se retroilumine(cambiando el color del texto) lo seleccionado con game.scheulde o eso
-    var color = colorSelectionOff
+    var color = 'B00000FF'
     method text() = texto
-
     method textColor() = color
-    method onColision(){
-        color = colorSelectionOn
-    }
-    method offColition(){
-        color = colorSelectionOff
-    }
 
 }
 
