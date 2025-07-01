@@ -5,7 +5,7 @@ import MainGame.*
 object pantallaCarga{
     method iniciarPantallaCarga(){
         game.clear()
-        game.boardGround("Mesa.png")
+        game.boardGround("Fondo.png")
         game.addVisual(jugar)
         game.addVisual(instrucciones)
         game.addVisual(about)

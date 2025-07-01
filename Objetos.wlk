@@ -138,7 +138,10 @@ object ordenAmostrar{
 
 object puntaje {
   var property position = game.at(0,8)
-  var property puntos = 0
+  var puntos = 0
+  method puntos() = puntos
+  method setPuntosWin(){puntos = (puntos + 15).min(60)}
+  method setPuntosLose(){puntos = (puntos -15).max(0)}
   method text() = "P:" + puntos
 
 }

@@ -52,7 +52,7 @@ object puntero{
   method ganar() = 
     if(pedidoArmado.compararPedido())
     {
-      puntaje.puntos(puntaje.puntos() + 15)
+      puntaje.setPuntosWin()
       game.say(self,"Ganaste")
       pedidoArmado.clean()
       orden.newOrden()
@@ -61,7 +61,7 @@ object puntero{
     } 
     else
     {
-      puntaje.puntos((puntaje.puntos() - 15))
+      puntaje.setPuntosLose()
       game.say(self,"Perdiste")
       console.println(puntaje.puntos())
     }
