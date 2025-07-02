@@ -5,6 +5,7 @@ class Alimento{
   var calorias 
   var image
   var position
+  var imagenPalabra
 
   var property estaEnLaParrilla = false
   var property estaColisionando = false   
@@ -12,6 +13,11 @@ class Alimento{
   method cocinar(){estaCrudo = false}
   method image() = image
   method position() = position
+  method crearPalabra(){
+    var palabra 
+    palabra = new Palabra(image = imagenPalabra, position = position.at(posicion.posicionXMostrar(),posicion.posicionYMostrar()))
+    game.addVisual(palabra)
+  }
   
 }
 
@@ -22,8 +28,9 @@ class Pan inherits Alimento{
 
   method initialize(){
     calorias = 100
-    image = "Pan_Arriba.png"
+    image = "Pan_ArribaF.png"
     position = game.at(posicion.posicionX(),posicion.posicionY())   //Cuando se instancia un nuevo objeto se acomda encima de la ultima cosa agregada"
+    imagenPalabra = "PanAbajoPalabra.png"
   }
 
   method ingrediente() = "Pan"
@@ -35,8 +42,9 @@ class Carne inherits Alimento{
 
   method initialize(){
     calorias = 250
-    image = "carne.png"
+    image = "carneF.png"
     position = game.at(posicion.posicionX(),posicion.posicionY())
+    imagenPalabra = "CarnePalabra.png"
   }
 
   override method cocinar(){
@@ -47,7 +55,7 @@ class Carne inherits Alimento{
     position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
     posicion.usarParrilla()
     game.schedule(5000, {
-        image = "Carne50.png"
+        image = "CarneCocidaF.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
         self.estaEnLaParrilla(false)
@@ -60,7 +68,7 @@ class Carne inherits Alimento{
     position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
     posicion.usarParrilla()
     game.schedule(5000, {
-        image = "Carboncito.png"
+        image = "CarboncitoF.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
     puntaje.setPuntosLose()
@@ -76,8 +84,9 @@ class Tomate inherits Alimento{
 
   method initialize(){
     calorias = 150
-    image = "Tomatito.png"
+    image = "TomateF.png"
     position = game.at(posicion.posicionX(),posicion.posicionY())
+    imagenPalabra = "TomatePalabra.png"
   }
 
   method ingrediente() = "Tomate"
@@ -87,8 +96,9 @@ class Tomate inherits Alimento{
 class Lechuga inherits Alimento{
 method initialize(){
   calorias = 100
-  image = "Lechuguita.png"
+  image = "LechugaF.png"
   position = game.at(posicion.posicionX(),posicion.posicionY())
+  imagenPalabra = "LechugaPalabra.png"
 }
 
   method ingrediente() = "Lechuga"
@@ -98,8 +108,9 @@ method initialize(){
 class Cebolla inherits Alimento{
   method initialize(){
     calorias = 80
-    image = "Cebollita.png"
+    image = "CebollaF.png"
     position = game.at(posicion.posicionX(),posicion.posicionY())
+    imagenPalabra = "CebollaPalabra.png"
   }
 
   method ingrediente() = "Cebolla"
@@ -108,8 +119,9 @@ class Cebolla inherits Alimento{
 class Mayonesa inherits Alimento{
   method initialize(){
     calorias = 150
-    image = "Mayonesita.png"
+    image = "MayonesaF.png"
     position = game.at(posicion.posicionX(),posicion.posicionY())
+    imagenPalabra = "MayonesaPalabra.png"
   }
 
   method ingrediente() = "Mayonesa"
@@ -118,8 +130,9 @@ class Mayonesa inherits Alimento{
 class Ketchup inherits Alimento(){
   method initialize(){
     calorias = 120
-    image = "ketchup.png"
+    image = "ketchupF.png"
     position = game.at(posicion.posicionX(),posicion.posicionY())
+    imagenPalabra = "KetchupPalabra.png"
   }
 
   method ingrediente()="Ketchup"
@@ -129,8 +142,9 @@ class Ketchup inherits Alimento(){
 class Cheddar inherits Alimento(){
   method initialize(){
     calorias = 200
-    image = "CheddarCrudo.png"
+    image = "CheddarCrudoF.png"
     position = game.at(posicion.posicionX(),posicion.posicionY())
+    imagenPalabra = "CheddarPalabra.png"
   }
 
   override method cocinar(){
@@ -141,7 +155,7 @@ class Cheddar inherits Alimento(){
     position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
     posicion.usarParrilla()
     game.schedule(5000, {
-        image = "Quesito.png"
+        image = "QuesoF.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
         self.estaEnLaParrilla(false)
@@ -154,7 +168,7 @@ class Cheddar inherits Alimento(){
       position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
       posicion.usarParrilla()
       game.schedule(5000, {
-          image = "Carboncito.png"
+          image = "CarboncitoF.png"
           position = posActual
           posicion.dejarDeUsarParrilla()
       puntaje.setPuntosLose()
@@ -169,8 +183,9 @@ class Cheddar inherits Alimento(){
 class Bacon inherits Alimento(){
   method initialize(){
     calorias = 250
-    image = "BaconCrudo.png"
+    image = "BaconCrudoF.png"
     position = game.at(posicion.posicionX(),posicion.posicionY())
+    imagenPalabra = "BaconPalabra.png"
   }
 
   override method cocinar(){
@@ -181,7 +196,7 @@ class Bacon inherits Alimento(){
     position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
     posicion.usarParrilla()
     game.schedule(5000, {
-        image = "Bacon.png"
+        image = "BaconF.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
         self.estaEnLaParrilla(false)
@@ -194,7 +209,7 @@ class Bacon inherits Alimento(){
     position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
     posicion.usarParrilla()
     game.schedule(5000, {
-        image = "Carboncito.png"
+        image = "CarboncitoF.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
     puntaje.setPuntosLose()
@@ -209,8 +224,9 @@ class Bacon inherits Alimento(){
 class Patylenteja inherits Alimento{
   method initialize(){
     calorias = 90
-    image = "Hamburguesa_LentejaCruda.png"
+    image = "Hamburguesa_LentejaCrudaF.png"
     position = game.at(posicion.posicionX(),posicion.posicionY())
+    imagenPalabra = "PatyLentejaPalabra"
   }
 
     override method cocinar(){
@@ -221,7 +237,7 @@ class Patylenteja inherits Alimento{
     position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
     posicion.usarParrilla()
     game.schedule(5000, {
-        image = "Hamburguesa_de_lentejas.png"
+        image = "Hamburguesa_de_lentejasF.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
         self.estaEnLaParrilla(false)
@@ -234,7 +250,7 @@ class Patylenteja inherits Alimento{
     position = game.at(posicion.posicionParrillaX(),posicion.posicionParrillaY())
     posicion.usarParrilla()
     game.schedule(5000, {
-        image = "Carboncito.png"
+        image = "CarboncitoF.png"
         position = posActual
         posicion.dejarDeUsarParrilla()
     puntaje.setPuntosLose()

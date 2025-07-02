@@ -4,6 +4,9 @@ import PantallaCarga.*
 
 object juego{
   method iniciar(){
+    puntaje.reiniciarPuntaje()
+    game.addVisual(temporizador)
+    temporizador.iniciar()
     game.addVisual(unBacon)
     game.addVisual(unPan) 
     game.addVisual(unaCarne)
@@ -22,7 +25,7 @@ object juego{
     keyboard.enter().onPressDo({puntero.ganar()})                           //Llama a verificar si esta bien loq ue armamos
     keyboard.c().onPressDo({self.cocinar()})
     keyboard.backspace().onPressDo({puntaje.setPuntosWin()})
-    game.onTick(1000, "VerificarWin", {self.ganar()})
+    game.onTick(1000, "VerificarWin", {self.finDelJuego()})
 
   }
     
@@ -48,7 +51,7 @@ object juego{
 
     method ganar(){
       if(self.evaluarJuego()){
-        puntaje.puntos(0)
+        //puntaje.puntos(0)
         game.clear()
         const sonidoWin = game.sound("VictoriaSound.mp3")
         sonidoWin.play()
@@ -58,6 +61,27 @@ object juego{
       }}
 
     method evaluarJuego()= (puntaje.puntos() > 60)
+
+
+    method perder(){
+      if(!self.evaluarJuego()){
+        //puntaje.puntos(0)
+        game.clear()
+        const sonidoLose = game.sound("loseGame.mp3")
+        sonidoLose.play()
+        game.removeTickEvent("VerificarWin")
+        game.removeTickEvent("Cronometro")
+        game.addVisual(loseMssg)
+        keyboard.q().onPressDo({pantallaCarga.iniciarPantallaCarga()})
+      }
+    }
+
+    method finDelJuego(){
+      if(temporizador.segundos() == 0 || puntaje.puntos() > 60){
+        self.ganar()
+        self.perder()
+      }
+    }
 }
 
 
@@ -67,7 +91,7 @@ object puntero{
 
 
   var property ultimoColisionado = null         //Esto me ayuda a verificar que solo cuando algo esta colisionando y al mismo timepo estoy tocanso la tecla de accion se cree una nueva instancia
-  var imagen = "circle.png"
+  var imagen = "circleF.png"
   method image() = imagen
   var property position = game.center()
 
