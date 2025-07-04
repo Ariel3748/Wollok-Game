@@ -1,8 +1,8 @@
 {
-  "name": "WollokGame",
+  "name": "TPGameIntegrador",
   "version": "1.0.0",
   "resourceFolder": "assets",
   "wollokVersion": "4.0.0",
-  "author": "ariel",
+  "author": "hernan",
   "license": "ISC"
 }

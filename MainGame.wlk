@@ -1,32 +1,28 @@
+import mainMenu.*
 import Alimento.*
 import Objetos.*
-import PantallaCarga.*
+
 
 object juego{
   method iniciar(){
-    puntaje.reiniciarPuntaje()
+    puntaje.seleccionadorDePuntaje()
+    console.println(puntaje.puntos())
     game.addVisual(temporizador)
+    temporizador.reiniciar()
     temporizador.iniciar()
-    game.addVisual(unBacon)
-    game.addVisual(unPan) 
-    game.addVisual(unaCarne)
     game.addVisualCharacter(puntero)
+    
     orden.newOrden()
-    game.addVisual(ordenAmostrar)
+    console.println(orden.orden())
+    self.agregarObjetosMuestra()
     game.addVisual(puntaje)
     game.onCollideDo(puntero, {                                             //cada vez que colisiona con algo, le cambia el estado interno a algo a true y al puntero le digo quien es algo para que luego verifique que sea != de null
         i=>i.estaColisionando(true)
         puntero.ultimoColisionado(i)
         game.schedule(750,{i.estaColisionando(false)})                     //Aca lo hice medio "Con alambre" porque no hay una forma de cambiar el estado interno de estaColisionando a false cuanso se separa, asi que despues de 1.5s lo cambio automaticamente
         })
-    keyboard.k().onPressDo({pedidoArmado.eliminarUltimoIngrediente()})
-    keyboard.t().onPressDo({self.hacerClon()})                                 //Llama al metodo hacerClon para que cuando toco la T verifique que esta colisionanso con eso mismo y lo clona
-    keyboard.x().onPressDo({console.println(pedidoArmado.ingredientes())})  //Verificaicon por consola de la lista de productos que se va armando
-    keyboard.enter().onPressDo({puntero.ganar()})                           //Llama a verificar si esta bien loq ue armamos
-    keyboard.c().onPressDo({self.cocinar()})
-    keyboard.backspace().onPressDo({puntaje.setPuntosWin()})
+    self.elementosTeclado()
     game.onTick(1000, "VerificarWin", {self.finDelJuego()})
-
   }
     
 
@@ -51,65 +47,88 @@ object juego{
 
     method ganar(){
       if(self.evaluarJuego()){
-        //puntaje.puntos(0)
         game.clear()
         const sonidoWin = game.sound("VictoriaSound.mp3")
         sonidoWin.play()
         game.removeTickEvent("VerificarWin")
         game.addVisual(winMssg)
-        keyboard.q().onPressDo({pantallaCarga.iniciarPantallaCarga()})
+        keyboard.m().onPressDo({menuPrincipal.mainMenu()})
+        keyboard.q().onPressDo({self.iniciar()})
+        game.schedule(1000, {puntaje.reiniciarPuntaje()})
       }}
 
-    method evaluarJuego()= (puntaje.puntos() > 60)
+    method evaluarJuego()= (puntaje.puntos() == 60)
 
 
     method perder(){
       if(!self.evaluarJuego()){
-        //puntaje.puntos(0)
         game.clear()
         const sonidoLose = game.sound("loseGame.mp3")
         sonidoLose.play()
         game.removeTickEvent("VerificarWin")
         game.removeTickEvent("Cronometro")
         game.addVisual(loseMssg)
-        keyboard.q().onPressDo({pantallaCarga.iniciarPantallaCarga()})
+        keyboard.m().onPressDo({ menuPrincipal.mainMenu() })
+        game.schedule(1000, {puntaje.reiniciarPuntaje()})
       }
     }
 
     method finDelJuego(){
-      if(temporizador.segundos() == 0 || puntaje.puntos() > 60){
+      if(temporizador.segundos() == 0 || puntaje.puntos() >= 60){
         self.ganar()
         self.perder()
       }
     }
+
+    method agregarObjetosMuestra(){
+      game.addVisual(unPanArriba)
+      game.addVisual(unPanAbajo) 
+      game.addVisual(unaCarne)
+      game.addVisual(ordenAmostrar)
+      game.addVisual(unBacon)
+      game.addVisual(unTomate)
+      game.addVisual(unaLechuga)
+      game.addVisual(unaCebolla)
+      game.addVisual(unFrascoDeMayonesa)
+      game.addVisual(unFrascoDeKechup)
+      game.addVisual(unPatyDeLenteja)
+      game.addVisual(unCheddar)
+    }
+
+    method elementosTeclado(){
+      keyboard.k().onPressDo({pedidoArmado.eliminarUltimoIngrediente()})
+      keyboard.t().onPressDo({self.hacerClon()})                                 //Llama al metodo hacerClon para que cuando toco la T verifique que esta colisionanso con eso mismo y lo clona
+      keyboard.x().onPressDo({console.println(pedidoArmado.ingredientes())})  //Verificaicon por consola de la lista de productos que se va armando
+      keyboard.enter().onPressDo({puntero.ganar()})                           //Llama a verificar si esta bien loq ue armamos
+      keyboard.c().onPressDo({self.cocinar()})
+      keyboard.backspace().onPressDo({puntaje.setPuntosWin()})
+      keyboard.m().onPressDo({ menuPrincipal.mainMenu() })
+    }
+
 }
 
 
 
 
 object puntero{
-
-
   var property ultimoColisionado = null         //Esto me ayuda a verificar que solo cuando algo esta colisionando y al mismo timepo estoy tocanso la tecla de accion se cree una nueva instancia
   var imagen = "circleF.png"
   method image() = imagen
   var property position = game.center()
-
   method ganar() = 
     if(pedidoArmado.compararPedido())
     {
       puntaje.setPuntosWin()
-      game.say(self,"Ganaste")
+      game.say(self,"Pedido exitoso")
       pedidoArmado.clean()
       orden.newOrden()
-      console.println(puntaje.puntos())
+
 
     } 
     else
     {
       puntaje.setPuntosLose()
-      game.say(self,"Perdiste")
-      console.println(puntaje.puntos())
+      game.say(self,"Pedido erroneo")
     }
 
 

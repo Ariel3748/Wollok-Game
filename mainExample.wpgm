@@ -1,22 +1,22 @@
-import wollok.game.*
 
+import wollok.game.*
 import MainGame.*
-import PantallaCarga.*
 import mainMenu.*
 
 
-program PepitaGame {
-	const musica = game.sound("musica.mp3")
-	
-	game.title("Pepita")
+program BurgerRush {
+	game.title("Burger Rush!")
 	game.height(10)
-	game.width(10)
+	game.width(11)
 	game.cellSize(150)
 	menuPrincipal.mainMenu()
-	musica.shouldLoop(true)
-	keyboard.s().onPressDo({musica.volume(1)})
-  	keyboard.b().onPressDo({musica.volume(0)})
-  	keyboard.m().onPressDo({musica.volume(0.5)})
-	game.schedule(1, {musica.play()})
+	keyboard.m().onPressDo({
+		game.clear()
+		menuPrincipal.mainMenu()
+		})
+	keyboard.up().onPressDo({sonido.play()})
+	keyboard.down().onPressDo({sonido.play()})
+	keyboard.left().onPressDo({sonido.play()})
+	keyboard.right().onPressDo({sonido.play()})
 	game.start()
 }
